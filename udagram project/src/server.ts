@@ -31,8 +31,29 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
 
   //! END @TODO1
   
+  app.get('/filteredimage', async (req: express.Request, res: express.Response) => {
+    const { image_url }: { image_url: string} = req.query
+    // Check if an image url was parsed to the endpoint
+    if (!image_url) {
+      return res.status(400).json({success: false, msg: "Failed to get image url"})
+    } 
+    // try to filter the image and send the file 
+    try {
+      const filteredpath: string = await filterImageFromURL(image_url);
+      return res.status(200).sendFile(filteredpath, ()=>deleteLocalFiles([filteredpath]))
+      
+    } catch (error) {
+      console.log(error)
+      // Else send the error message.
+      return res.status(422).send("Unprocessable Entity: Make sure that the data sent in the request contains all valid fields.")
+      
+    }
+  })
+  
   // Root Endpoint
   // Displays a simple message to the user
+  
+  
   app.get( "/", async ( req, res ) => {
     res.send("try GET /filteredimage?image_url={{}}")
   } );
