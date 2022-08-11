@@ -9,10 +9,6 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
-    env:
-        NAME_USER: ${{ secrets.DOCKER_USERNAME }}
-        DOCKER_PASS: ${{ secrets.DOCKER_PASSWORD }}
         
     steps:
       - name: Checkout code
