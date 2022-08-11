@@ -9,5 +9,8 @@ services:
 install:
   - docker-compose -f monolith-to-microservices-project/docker-compose-build.yml build --parallel
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker-compose -f monolith-to-microservices-project/docker-compose-build.yml push
+  - docker push waltongoga/udagram-frontend:v1
+  - docker push waltongoga/udagram-api-feed:v1
+  - docker push waltongoga/udagram-api-user:v1
+  - docker push waltongoga/reverseproxy:v1
 
