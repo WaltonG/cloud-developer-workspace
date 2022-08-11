@@ -8,7 +8,7 @@ services:
 
 install:
   - docker-compose -f monolith-to-microservices-project/docker-compose-build.yml build --parallel
-  - docker-compose -f monolith-to-microservices-project/docker-compose-build.yml build push
+  - docker-compose -f monolith-to-microservices-project/docker-compose-build.yml push
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
 
