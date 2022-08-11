@@ -1,0 +1,49 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          
+      - name: Publish udagram-api-feed to Docker Hub
+        uses: docker/build-push-action@v2
+        with:
+          context: ./monolith-to-microservices-project/udagram-api-feed
+          push: true
+          tags: waltongoga/udagram-api-feed:latest, waltongoga/udagram-api-feed:${{ github.run_number }}
+          
+      - name: Publish udagram-api-user to Docker Hub
+        uses: docker/build-push-action@v2
+        with:
+          context: ./monolith-to-microservices-project/udagram-api-user
+          push: true
+          tags: waltongoga/udagram-api-user:latest, waltongoga/udagram-api-user:${{ github.run_number }}
+          
+      - name: Publish udagram-frontend to Docker Hub
+        uses: docker/build-push-action@v2
+        with:
+          context: ./monolith-to-microservices-project/udagram-frontend
+          push: true
+          tags: waltongoga/udagram-frontend:latest, waltongoga/udagram-frontend:${{ github.run_number }}
+          
+      - name: Publish reverseproxy to Docker Hub
+        uses: docker/build-push-action@v2
+        with:
+          context: ./monolith-to-microservices-project/udagram-reverseproxy
+          push: true
+          tags: waltongoga/reverseproxy:latest, waltongoga/reverseproxy:${{ github.run_number }}
