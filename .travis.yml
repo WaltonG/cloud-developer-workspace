@@ -7,7 +7,6 @@ services:
   - docker
 
 install:
-  - docker-compose -f docker-compose-build.yml build --parallel
   - docker build -t udagram-api-feed ./monolith-to-microservices-project/udagram-api-feed
   - docker build -t udagram-api-frontend ./monolith-to-microservices-project/udagram-api-frontend
   - docker build -t udagram-api-user ./monolith-to-microservices-project/udagram-api-user
