@@ -4,7 +4,7 @@ services:
   - docker
 
 install:
-  - docker-compose -f cloud-developer-workspace/monolith-to-microservices-project/docker-compose-build.yaml build --parallel
+  - docker-compose -f cloud-developer-workspace/monolith-to-microservices-project/docker-compose-build.yml build --parallel
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker-compose -f cloud-developer-workspace/monolith-to-microservices-project/docker-compose-build.yaml push
+  - docker-compose -f cloud-developer-workspace/monolith-to-microservices-project/docker-compose-build.yml push
 
