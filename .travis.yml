@@ -8,7 +8,6 @@ services:
 
 install:
   - docker build -t udagram-api-feed ./monolith-to-microservices-project/udagram-api-feed
-  - docker build -t udagram-api-frontend ./monolith-to-microservices-project/udagram-api-frontend
   - docker build -t udagram-api-user ./monolith-to-microservices-project/udagram-api-user
   - docker build -t udagram-api-reverseproxy ./monolith-to-microservices-project/udagram-api-reverseproxy
   - docker tag udagram-api-feed waltongoga/udagram-api-feed:v1
