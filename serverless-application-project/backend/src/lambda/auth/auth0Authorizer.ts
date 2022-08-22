@@ -3,12 +3,12 @@ import 'source-map-support/register'
 
 import { verify } from 'jsonwebtoken'
 import { createLogger } from '../../utils/logger'
-import Axios from 'axios'
+//import Axios from 'axios'
 import { JwtPayload } from '../../auth/JwtPayload'
 
 const logger = createLogger('auth')
 
-const cert = `-----BEGIN CERTIFICATE-----
+const cert2 = `-----BEGIN CERTIFICATE-----
 MIIDATCCAemgAwIBAgIJBmlNvhzzBfnqMA0GCSqGSIb3DQEBCwUAMB4xHDAaBgNV
 BAMTE3dhbHRvbi51cy5hdXRoMC5jb20wHhcNMjIwODIyMDk1NjM5WhcNMzYwNDMw
 MDk1NjM5WjAeMRwwGgYDVQQDExN3YWx0b24udXMuYXV0aDAuY29tMIIBIjANBgkq
@@ -75,7 +75,7 @@ async function verifyToken(authHeader: string): Promise<JwtPayload> {
 
   logger.info(`Verifying token ${token}`)
 
-  return verify(token, cert, { algorithms: ['RS256'] }) as JwtPayload
+  return verify(token, cert2, { algorithms: ['RS256'] }) as JwtPayload
 }
 
 function getToken(authHeader: string): string {
