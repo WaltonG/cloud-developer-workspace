@@ -1,4 +1,4 @@
-import { CustomAuthorizerEvent, CustomAuthorizerResult } from 'aws-lambda'
+import { APIGatewayTokenAuthorizerEvent, CustomAuthorizerResult } from 'aws-lambda'
 import 'source-map-support/register'
 
 import { verify } from 'jsonwebtoken'
@@ -8,7 +8,7 @@ import { JwtPayload } from '../../auth/JwtPayload'
 
 const logger = createLogger('auth')
 
-const cert2 = `-----BEGIN CERTIFICATE-----
+const cert = `-----BEGIN CERTIFICATE-----
 MIIDATCCAemgAwIBAgIJBmlNvhzzBfnqMA0GCSqGSIb3DQEBCwUAMB4xHDAaBgNV
 BAMTE3dhbHRvbi51cy5hdXRoMC5jb20wHhcNMjIwODIyMDk1NjM5WhcNMzYwNDMw
 MDk1NjM5WjAeMRwwGgYDVQQDExN3YWx0b24udXMuYXV0aDAuY29tMIIBIjANBgkq
@@ -29,7 +29,7 @@ Z+Q44mE=
 -----END CERTIFICATE-----`
 
 export const handler = async (
-  event: CustomAuthorizerEvent
+  event: APIGatewayTokenAuthorizerEvent
 ): Promise<CustomAuthorizerResult> => {
   logger.info('Authorizing a user', event.authorizationToken)
   try {
@@ -75,7 +75,7 @@ async function verifyToken(authHeader: string): Promise<JwtPayload> {
 
   logger.info(`Verifying token ${token}`)
 
-  return verify(token, cert2, { algorithms: ['RS256'] }) as JwtPayload
+  return verify(token, cert, { algorithms: ['RS256'] }) as JwtPayload
 }
 
 function getToken(authHeader: string): string {
