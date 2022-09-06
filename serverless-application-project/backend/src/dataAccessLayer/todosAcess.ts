@@ -19,7 +19,7 @@ const logger = createLogger('todosAcess')
 
 export class TodosAccess {
   constructor(
-    private readonly docClient: DocumentClient = createDynamoDBClient(),
+    private readonly docClient: DocumentClient = new XAWS.DynamoDB.DocumentClient(),
     private readonly todoTable = process.env.TODOS_TABLE,
     private readonly todosCreatedAtIndex = process.env.TODOS_CREATED_AT_INDEX
   ) { }
